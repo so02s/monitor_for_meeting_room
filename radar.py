@@ -1,8 +1,15 @@
-from  LD2410  import *
+import LD2410
 import time
+import logging
 
-radar = LD2410(port="/dev/ttyAMA0") # Replace <port> with your serial port. e.g "COM3" or "/dev/ttyS0" etc. 
+# Необходимо для отключения DEBUG
+logging.basicConfig(level=logging.WARNING)
+logger = logging.getLogger('LD2410')
+logger.setLevel(logging.WARNING)
+logging.getLogger().setLevel(logging.WARNING)
 
+# для работы порта необходимо отключить bluetooth
+radar = LD2410.LD2410(port="/dev/ttyAMA0")
 radar.disable_engineering_mode()
 
 def extract_distances(data):
