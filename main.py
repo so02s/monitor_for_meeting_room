@@ -3,6 +3,30 @@ import board
 import neopixel
 from radar import radar, extract_distances
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Ниже - проверка разного функционала устройства
+
+
 # Настройки
 LED_COUNT = 4
 LED_PIN = board.D12

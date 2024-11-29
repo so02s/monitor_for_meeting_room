@@ -10,7 +10,6 @@ logging.getLogger().setLevel(logging.WARNING)
 
 # для работы порта необходимо отключить bluetooth
 radar = LD2410.LD2410(port="/dev/ttyAMA0")
-radar.disable_engineering_mode()
 
 def extract_distances(data):
     """
@@ -28,3 +27,24 @@ def extract_distances(data):
     static_distance = data[3]
 
     return movement_distance, static_distance
+
+
+# Код на проверку на всякий случай. Следующая строка - команда для оболочки, чтобы очистить порт
+# lsof /dev/ttyAMA0
+
+# fw_version = radar.read_firmware_version()
+# print(f"Firmware version: {fw_version}")
+
+# # Запуск опроса радара
+# radar.start()
+
+# try:
+#     while True:
+#         data = radar.get_data()
+#         if data:
+#             print(f"Detected data: {data}")
+#         time.sleep(1)  # Интервал опроса
+# except KeyboardInterrupt:
+#     print("Stopping radar polling...")
+# finally:
+#     radar.stop()

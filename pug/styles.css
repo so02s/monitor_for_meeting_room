@@ -1,0 +1,40 @@
+
+.arc-heading .arc-heading__heading,
+.arc-heading .arc-heading__subheading {
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  line-height: 1;
+}
+.arc-heading .arc-heading__heading {
+  font-size: 60px;
+  fill: #ffffff;
+}
+.arc-heading .arc-heading__subheading {
+  font-size: 50px;
+  fill: #ffffff;
+  letter-spacing: 0.05em;
+}
+html,
+body {
+  margin: 0;
+  align-items: center;
+}
+
+.arc-heading .status-text{
+  font-family: 'Oswald', sans-serif;
+  font-size: 80px;
+  fill: #00ffc8;
+}
+
+.arc-heading .const-text{
+  font-family: 'Oswald', sans-serif;
+  font-size: 40px;
+  fill: #ffffff;
+}
+
+.container {
+  background: linear-gradient(#161c26 33.61%, #162626 40.76%, #00ffc8);
+  width: 1080px;
+  height: 1080px;
+  align-items: center;
+}
