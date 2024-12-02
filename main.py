@@ -3,6 +3,7 @@ import board
 import subprocess
 import threading
 import neopixel
+import threading
 from radar import radar, extract_distances
 
 '''
@@ -19,20 +20,33 @@ from radar import radar, extract_distances
 
 # Проверка расписания на день конкретной переговорки - раз в сутки? Чаще? Надо поговорить
 
+# export DISPLAY=:0
+# xrandr --output HDMI-1 --brightness 1
+# xrandr --output HDMI-1 --brightness 0
 
-def turn_off_hdmi():
-    try:
-        subprocess.run(['/opt/vc/bin/tvservice', '-o'], check=True)
-        print("HDMI отключен.")
-    except subprocess.CalledProcessError as e:
-        print(f"Ошибка при отключении HDMI: {e}")
 
-def turn_on_hdmi():
+
+# =============================== Радар ===================================
+
+def set_brightness(brightness):
     try:
-        subprocess.run(['/opt/vc/bin/tvservice', '-p'], check=True)
-        print("HDMI включен.")
+        subprocess.run(['xrandr', '--output', 'HDMI-1', '--brightness', str(brightness)], check=True)
     except subprocess.CalledProcessError as e:
-        print(f"Ошибка при включении HDMI: {e}")
+        pass
+
+def turn_on_hdmi(duration=2):
+    steps = 100
+    for i in range(steps + 1):
+        brightness = 1 - (i / steps)
+        set_brightness(brightness)
+        time.sleep(duration / steps)
+
+def turn_off_hdmi(duration=5):
+    steps = 100
+    for i in range(steps + 1):
+        brightness = i / steps
+        set_brightness(brightness)
+        time.sleep(duration / steps)
 
 class DisplayTimer:
     def __init__(self):
@@ -55,8 +69,8 @@ class DisplayTimer:
     def turn_off(self):
         self.active = False
         turn_off_hdmi()
-
-
+        
+        
 radar.start()
 display_timer = DisplayTimer()
 
@@ -72,7 +86,8 @@ try:
 except KeyboardInterrupt:
     if display_timer.active:
         display_timer.turn_off()  # Убедитесь, что дисплей отключен при выходе
-    print("Программа завершена.")
+        radar.stop()
+
 
 
 
