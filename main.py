@@ -1,10 +1,13 @@
 import time
-import board
+import threading
+
+import os
 import subprocess
-import threading
+
+import board
 import neopixel
-import threading
-from radar import radar, extract_distances
+
+from radar import Radar
 
 '''
 Что должен делать?
@@ -25,6 +28,16 @@ from radar import radar, extract_distances
 # xrandr --output HDMI-1 --brightness 0
 
 
+# Настройки
+LED_COUNT = 4
+LED_PIN = board.D12
+# Создание объекта для управления светодиодами
+pixels = neopixel.NeoPixel(LED_PIN, LED_COUNT)
+
+# Функция для установки цвета
+def set_color(color):
+    pixels.fill(color)
+
 
 # =============================== Радар ===================================
 
@@ -34,15 +47,13 @@ def set_brightness(brightness):
     except subprocess.CalledProcessError as e:
         pass
 
-def turn_on_hdmi(duration=2):
-    steps = 100
+def turn_on_hdmi(duration=1, steps = 50):
     for i in range(steps + 1):
         brightness = 1 - (i / steps)
         set_brightness(brightness)
         time.sleep(duration / steps)
 
-def turn_off_hdmi(duration=5):
-    steps = 100
+def turn_off_hdmi(duration=5, steps = 100):
     for i in range(steps + 1):
         brightness = i / steps
         set_brightness(brightness)
@@ -59,6 +70,7 @@ class DisplayTimer:
             self.timer = threading.Timer(60, self.turn_off)
             self.timer.start()
             turn_on_hdmi()
+            set_color((0, 255, 0))
 
     def reset(self):
         if self.active:
@@ -69,14 +81,21 @@ class DisplayTimer:
     def turn_off(self):
         self.active = False
         turn_off_hdmi()
-        
-        
-radar.start()
+        set_color((255, 0, 0))
+
+
+def is_human_near(radar: Radar) -> bool:
+    distance = radar.get_data()
+    return distance[0] < 120 or distance[1] < 120
+
+radar = Radar()
 display_timer = DisplayTimer()
+
+# Тут отдельный поток для проверки радара 
 
 try:
     while True:
-        distance = extract_distances(radar.get_data())
+        distance = radar.get_data()
         if distance[0] < 120 or distance[1] < 120:
             display_timer.start()
             display_timer.reset()
@@ -93,7 +112,8 @@ except KeyboardInterrupt:
 
 
 
-
+if __name__ == "__main__":
+    radar = Radar()
 
 
 
@@ -105,15 +125,7 @@ except KeyboardInterrupt:
 # Ниже - проверка разного функционала устройства
 
 
-# # Настройки
-# LED_COUNT = 4
-# LED_PIN = board.D12
-# # Создание объекта для управления светодиодами
-# pixels = neopixel.NeoPixel(LED_PIN, LED_COUNT)
 
-# # Функция для установки цвета
-# def set_color(color):
-#     pixels.fill(color)
 
 # while(True):
 #     distance = extract_distances(radar.get_data())
