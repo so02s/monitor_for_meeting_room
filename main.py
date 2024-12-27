@@ -1,5 +1,6 @@
 import asyncio
 import logging
+import webbrowser
 from decouple import config
 
 import board
@@ -54,8 +55,10 @@ async def check_schedule():
                 await change_image(occupied, schedule, room_name)
             except:
                 await static_image()
+                
+        webbrowser.open("./pug/index.html")
 
-        await asyncio.sleep(900) # 15 минут = 15 * 60
+        await asyncio.sleep(30) # 15 минут = 15 * 60 = 900
 
 
 
@@ -92,6 +95,7 @@ async def check_radar():
 async def main():
     schedule_task = asyncio.create_task(check_schedule())
     radar_task = asyncio.create_task(check_radar())
+
 
     await asyncio.gather(schedule_task, radar_task)
 
