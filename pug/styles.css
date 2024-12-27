@@ -24,6 +24,10 @@ body {
   font-family: 'Oswald', sans-serif;
   font-size: 80px;
   fill: #00ffc8;
+  /* position: absolute;
+  text-anchor: middle;
+  x: 50%;
+  y: 50%; */
 }
 
 .arc-heading .const-text{
@@ -37,4 +41,17 @@ body {
   width: 1080px;
   height: 1080px;
   align-items: center;
+}
+
+.arc-heading {
+  animation: rotate 10s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

@@ -1,3 +1,7 @@
+# TODO просто не нужно. удалить после тестирования
+
+
+
 import LD2410
 import time
 import logging
@@ -55,3 +59,19 @@ class Radar:
 #     print("Stopping radar polling...")
 # finally:
 #     radar.stop()
+
+def get_data(data):
+    """
+    Извлекает расстояния до движущейся и статической цели из данных LD2410.
+
+    :param data: Список, возвращаемый функцией get_data_frame()
+    :return: Кортеж с расстоянием до движущейся и статической цели
+    """
+    data = data[0]
+    
+    if len(data) < 6:
+        raise ValueError("Недостаточно данных для извлечения расстояний.")
+
+    movement_distance = data[1]
+
+    return movement_distance

@@ -1,0 +1,30 @@
+html
+  head
+    <meta charset="utf-8">
+    link(rel='stylesheet', type='text/css', href='./styles.css')
+    title Не занято
+
+  body
+    .container
+      text(x='50' y='55' text-anchor='middle' fill='white' font-size='20') 
+      h1 Не занято 
+      
+      if schedule.length > 0
+        each item in schedule
+          text(x='50' y='85' text-anchor='middle' fill='white' font-size='16') 
+          | Имя: #{item.name}, Время: #{item.time}
+      else
+        text(x='50' y='85' text-anchor='middle' fill='white' font-size='16') 
+        | Нет запланированных событий.
+
+      style.
+        .container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          height: 100vh;
+          background-color: #161C26;
+          color: #fff;
+          text-align: center;
+        }

@@ -21,7 +21,7 @@ mixin arcHeading(heading, subheading)
       xmlns='http://www.w3.org/2000/svg'
       xmlns:xlink='http://www.w3.org/1999/xlink'
       viewBox='0 0 ' + totalD + ' ' + totalD
-      )
+    )
       defs
         path(
           id='heading-arc'
@@ -41,10 +41,6 @@ mixin arcHeading(heading, subheading)
       text.arc-heading__subheading(fill='#fff' text-anchor='middle' y=(totalD / 2) - totalR - 40)
         textPath(startOffset='50%' xlink:href='#subheading-arc')= subheading
 
-      
-
-      // Inner circles
-      // Not required for text effect, just used for demo
       circle(cx=(totalD / 2) + 'px', cy=(totalD / 2) + 'px', r=totalR * 0.80, fill='#161C26')
       text.status-text(x=(totalD / 2) y=(totalD / 2) text-anchor='middle')
         | Свободно 
@@ -54,4 +50,4 @@ html
   <meta charset="utf-8">
   body
     .container
-      +arcHeading('Акселератор 1', 'следующий слот с 10:30 до 12:00')
+      +arcHeading('Акселератор 1', schedule)

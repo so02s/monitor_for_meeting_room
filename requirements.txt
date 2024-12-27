@@ -2,3 +2,6 @@ rpi_ws281x
 adafruit-circuitpython-neopixel
 LD2410
 pyserial
+pug4py
+aiohttp
+python-decouple
