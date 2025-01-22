@@ -1,10 +1,11 @@
 [Unit]
 Description=service for meeting room monitor
-After=display-manager.service
+After=display-manager.serviceq
 
 [Service]
-User=user
-ExecStart= run.sh
+Type=simple
+ExecStart=/home/monitor/monitor_for_meeting_room/run.sh
+User=monitor
 Environment="DISPLAY=:0"
 Environment="XAUTHORITY=/home/user/.Xauthority"
 StandardOutput=journal
