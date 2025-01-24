@@ -12,24 +12,14 @@
       <div class="overlap-group">
         <div class="text-wrapper">Занятые слоты:</div>
         <div class="frame">
+          {% for slot in slots %}
           <div class="div-wrapper">
-            <div class="div">10:00 - 10:30</div>
+            <div class="div">{{ slot.time }}</div>
           </div>
           <div class="frame-2">
-            <div class="text-wrapper-2">встреча</div>
+            <div class="text-wrapper-2">{{ slot.name }}</div>
           </div>
-          <div class="div-wrapper">
-            <div class="div">10:00 - 10:30</div>
-          </div>
-          <div class="frame-2">
-            <div class="text-wrapper-2">митинг</div>
-          </div>
-          <div class="div-wrapper">
-            <div class="div">10:00 - 10:30</div>
-          </div>
-          <div class="frame-2">
-            <div class="text-wrapper-2">созвон</div>
-          </div>
+          {% endfor %}
         </div>
         <div class="text-wrapper-3">СВОБОДНО</div>
         <div class="group">

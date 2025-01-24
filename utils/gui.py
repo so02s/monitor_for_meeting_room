@@ -1,27 +1,49 @@
 import os
 import time
 import subprocess
-from pug4py.pug import Pug
+from datetime import datetime
+import webbrowser
+
+from jinja2 import Template
+from pathlib import Path
 
 # Генерирование веб страничек
 
-# TODO открывание страничек после генерации
-async def change_image(occupied: dict, schedule, room_name: str) -> None:
-    pug = Pug("pug")
-    if occupied:
-        rendered_html = pug.render("./pug/occupied.pug", occupied=occupied, room_name=room_name)
-    else:
-        rendered_html = pug.render("./pug/nobody.pug", schedule=schedule, room_name=room_name)
-    with open("./pug/index.html", "w") as f:
-        f.write(rendered_html)
+async def change_image(occupied: dict, schedule, path: Path):
+    # определение стиля
+    mode = "light" if datetime.now().hour < 12 else "dark"
+    occup = "occupied" if occupied else "free"
+    dist_path = path / mode / occup
 
-async def static_image() -> None:
-    pug = Pug("pug")
-    rendered_html = pug.render("./pug/static.pug")
+    # Рендер html странички
+    tmp = Template(open(dist_path / "index.html").read())
+    html = tmp.render(slots=schedule)
+
+    # запись в файл
+    with open(dist_path / "temp.html", "w") as f:
+        f.write(html)
+
+    # открытие странички
+    # TODO до этого нужно закрывать прошлую
+    # webbrowser.register('vivaldi', None, webbrowser.BackgroundBrowser('/usr/bin/vivaldi'))
+    # webbrowser.get('vivaldi').open(dist_path.as_posix() + "/temp.html")
+    webbrowser.open(dist_path.as_posix() + "/temp.html")
+
+async def static_image(path: Path):
+    # определение стиля
+    mode = "light" if datetime.now().hour < 12 else "dark"
+    dist_path = path / mode / "error"
+
+    # рендер
+    tmp = Template(open(dist_path / "index.html").read())
+    html = tmp.render()
+
+    # запись в файл
+    with open(dist_path / "temp.html", "w") as f:
+        f.write(html)
     
-    with open("./pug/index.html", "w") as f:
-        f.write(rendered_html)
-
+    webbrowser.open(dist_path.as_posix() + "/temp.html")
+    
 
 # Работа с дисплеем
 

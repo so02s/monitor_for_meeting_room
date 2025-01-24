@@ -1,16 +1,16 @@
 import asyncio
 import logging
-import webbrowser
+import pathlib
 from decouple import config
 
-import board
-import neopixel
+# import board
+# import neopixel
 
 import LD2410
 
 from utils.request import fetch_data, fetch_data_test
 from utils.json import parse_schedule
-from utils.pixel import change_color
+# from utils.pixel import change_color
 from utils.gui import change_image, static_image, turn_off_hdmi, turn_on_hdmi
 from utils.timer import ResettableTimer
 
@@ -24,8 +24,6 @@ from utils.timer import ResettableTimer
 
 '''
 
-# TODO bash скрипт для настройки всех штук. убрать отключение монитора по времени raspberry
-
 
 async def check_schedule():
     '''
@@ -33,11 +31,13 @@ async def check_schedule():
     '''
     url = config('URL')
     room = config('ROOM_NUMBER')
-    room_name = config('ROOM_NAME')
 
-    LED_COUNT = 4
-    LED_PIN = board.D12
-    pixels = neopixel.NeoPixel(LED_PIN, LED_COUNT)
+    base_dir = pathlib.Path('./sources') / config("DISPL")
+    # room_name = config('ROOM_NAME')
+
+    # LED_COUNT = 4
+    # LED_PIN = board.D12
+    # pixels = neopixel.NeoPixel(LED_PIN, LED_COUNT)
     
     while True:
         try:
@@ -46,21 +46,17 @@ async def check_schedule():
             response = None
 
         if not response:
-            await static_image()
+            await static_image(base_dir)
         else:
             try:
                 occupied, schedule = parse_schedule(response)
 
-                await change_color(occupied, pixels)
-                await change_image(occupied, schedule, room_name)
+                # await change_color(occupied, pixels)
+                await change_image(occupied, schedule, base_dir)
             except:
-                await static_image()
-                
-        webbrowser.open("./pug/index.html")
+                await static_image(base_dir)
 
         await asyncio.sleep(30) # 15 минут = 15 * 60 = 900
-
-
 
 async def check_radar():
     '''
@@ -94,10 +90,13 @@ async def check_radar():
 
 async def main():
     schedule_task = asyncio.create_task(check_schedule())
-    radar_task = asyncio.create_task(check_radar())
+    # radar_task = asyncio.create_task(check_radar())
 
 
-    await asyncio.gather(schedule_task, radar_task)
+    await asyncio.gather(
+        schedule_task,
+        # radar_task
+    )
 
 if __name__ == "__main__":
     asyncio.run(main())

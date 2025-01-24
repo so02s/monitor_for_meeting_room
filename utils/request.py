@@ -25,52 +25,52 @@ async def fetch_data(url: str, room: str) -> Any:
 
 # для тестирования
 async def fetch_data_test(url: str, room: str) -> Dict[str, Any]:
-    test_data: List[Dict[str, Any]] = [
-        {
-            "room": "1",
-            "date": "2024-12-16",
-            "records": [
-                {"name": "sorencoa", "time": "9:00-10:00"},
-                {"name": "john_doe", "time": "10:00-11:00"},
-                {"name": "jane_smith", "time": "11:00-12:00"}
-            ]
-        },
-        {
-            "room": "1",
-            "date": "2024-12-16",
-            "records": []
-        },
-        {
-            "room": "1",
-            "date": "2024-12-16",
-            "records": [
-                {"name": "alice", "time": "14:00-15:00"}
-            ]
-        },
-        {
-            "room": "1",
-            "date": "2024-12-16",
-            "records": [
-                {"name": "bob", "time": "8:00-9:00"},
-                {"name": "charlie", "time": "12:00-13:00"},
-                {"name": "dave", "time": "15:00-16:00"}
-            ]
-        },
-        {
-            "room": "1",
-            "date": "2024-12-16",
-            "records": [
-                {"name": "invalid_user", "time": "not_a_time"}
-            ]
-        },
-        {
-            "room": "1",
-            "date": "2024-12-16",
-            "records": [
-                {"time": "9:00-10:00"}  # Отсутствует поле "name"
-            ]
-        },
-        None
-    ]
+    # return None
+        # {
+        #     "room": "1",
+        #     "date": "2024-12-16",
+        #     "records": []
+        # },
+        # {
+        #     "room": "1",
+        #     "date": "2024-12-16",
+        #     "records": [
+        #         {"name": "alice", "time": "14:00-15:00"}
+        #     ]
+        # },
+        # {
+        #     "room": "1",
+        #     "date": "2024-12-16",
+        #     "records": [
+        #         {"name": "bob", "time": "8:00-9:00"},
+        #         {"name": "charlie", "time": "12:00-13:00"},
+        #         {"name": "dave", "time": "15:00-16:00"}
+        #     ]
+        # },
+        # {
+        #     "room": "1",
+        #     "date": "2024-12-16",
+        #     "records": [
+        #         {"name": "invalid_user", "time": "not_a_time"}
+        #     ]
+        # },
+        # {
+        #     "room": "1",
+        #     "date": "2024-12-16",
+        #     "records": [
+        #         {"time": "9:00-10:00"}  # Отсутствует поле "name"
+        #     ]
+        # },
+        # None
 
-    return random.choice(test_data)
+    return '''
+{
+    "room": "1",
+    "date": "2025-01-24",
+    "records": [
+        {"name": "sorencoa", "time": "9:00-10:00"},
+        {"name": "john_doe", "time": "10:00-11:00"},
+        {"name": "jane_smith", "time": "11:00-12:00"}
+    ]
+}
+'''
