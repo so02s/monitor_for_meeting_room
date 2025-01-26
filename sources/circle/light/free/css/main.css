@@ -160,4 +160,14 @@ a {
   height: 1042px;
   top: 19px;
   left: 19px;
+  animation: rotate 30s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

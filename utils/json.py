@@ -18,6 +18,7 @@ def parse_schedule(response: str):
     current_time = datetime.now().strftime("%H:%M")
     occupied = None
     
+    # проверка занятости и форматирование
     for record in records:
         if not isinstance(record, dict):
             raise TypeError("Ошибка: Каждый элемент в 'records' должен быть словарем.")
@@ -32,13 +33,17 @@ def parse_schedule(response: str):
         start_time, end_time = time_range
         
         try:
-            datetime.strptime(start_time, "%H:%M")
-            datetime.strptime(end_time, "%H:%M")
+            f_start_dt = datetime.strptime(start_time, "%H:%M").strftime("%H:%M")
+            f_end_dt = datetime.strptime(end_time, "%H:%M").strftime("%H:%M")
         except ValueError:
             raise ValueError(f"Ошибка: Неверный формат времени для записи {record}. Ожидается 'HH:MM'.")
         
-        if start_time <= current_time <= end_time:
+        # Форматирование записей
+        record["time"] = f"{f_start_dt}-{f_end_dt}"
+
+        if not occupied and start_time <= current_time <= end_time:
             occupied = record
-            break
-    
+            
+    records.sort(key=lambda x: x['time'])
+
     return occupied, records

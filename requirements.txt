@@ -4,3 +4,4 @@ LD2410
 pyserial
 aiohttp
 python-decouple
+pyautogui

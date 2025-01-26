@@ -3,6 +3,7 @@ import time
 import subprocess
 from datetime import datetime
 import webbrowser
+import pyautogui
 
 from jinja2 import Template
 from pathlib import Path
@@ -15,6 +16,19 @@ async def change_image(occupied: dict, schedule, path: Path):
     occup = "occupied" if occupied else "free"
     dist_path = path / mode / occup
 
+    if occupied:
+        now = datetime.now()
+        for record in schedule:
+            record['time']
+
+        [{'name': x['name'], 'time': datetime.strptime(x['time'], '%H:%M')} for x in schedule]
+        schedule = [x for x in schedule if x['time'].replace(year=now.year, month=now.month, day=now.day) >= now]
+        schedule = schedule[:3]
+        schedule = [{'name': x['name'], 'time': x['time'].strftime('%H:%M')} for x in schedule]
+    else:
+        # TODO две занятые и вычисление свободного
+        pass
+
     # Рендер html странички
     tmp = Template(open(dist_path / "index.html").read())
     html = tmp.render(slots=schedule)
@@ -24,7 +38,7 @@ async def change_image(occupied: dict, schedule, path: Path):
         f.write(html)
 
     # открытие странички
-    # TODO до этого нужно закрывать прошлую
+    pyautogui.hotkey('ctrl', 'w')
     # webbrowser.register('vivaldi', None, webbrowser.BackgroundBrowser('/usr/bin/vivaldi'))
     # webbrowser.get('vivaldi').open(dist_path.as_posix() + "/temp.html")
     webbrowser.open(dist_path.as_posix() + "/temp.html")
@@ -42,8 +56,9 @@ async def static_image(path: Path):
     with open(dist_path / "temp.html", "w") as f:
         f.write(html)
     
+    pyautogui.hotkey('ctrl', 'w')
     webbrowser.open(dist_path.as_posix() + "/temp.html")
-    
+
 
 # Работа с дисплеем
 
