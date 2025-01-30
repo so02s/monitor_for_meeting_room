@@ -1,0 +1,74 @@
+/* screen - 2u95darku951080x1080u95error */
+
+.x2u95darku951080x1080u95error {
+  align-items: flex-start;
+  background-color: var(--steel-gray);
+  display: flex;
+  width: 1080px;
+}
+
+.x2u95darku951080x1080u95error .overlap-group1 {
+  background-image: url(../img/--------9-1.png);
+  background-position: 50% 50%;
+  background-size: cover;
+  height: 1080px;
+  position: relative;
+  width: 1080px;
+}
+
+.x2u95darku951080x1080u95error .group-2043683284 {
+  align-items: flex-end;
+  background-color: var(--selective-yellow);
+  border-radius: 87.5px;
+  display: flex;
+  height: 175px;
+  left: 453px;
+  min-width: 175px;
+  padding: 30.3px 30.7px;
+  position: absolute;
+  top: 168px;
+}
+
+.x2u95darku951080x1080u95error .overlap-group {
+  height: 114px;
+  position: relative;
+  width: 114px;
+}
+
+.x2u95darku951080x1080u95error .text-16 {
+  left: 419px;
+  line-height: 52.1px;
+  top: 376px;
+  white-space: nowrap;
+}
+
+.x2u95darku951080x1080u95error .text-17 {
+  left: 318px;
+  line-height: 50.0px;
+  text-align: center;
+  top: 821px;
+  width: 445px;
+}
+
+.x2u95darku951080x1080u95error .vector {
+  height: 231px;
+  left: 384px;
+  position: absolute;
+  top: 519px;
+  width: 316px;
+}
+
+.x2u95darku951080x1080u95error .rectangle {
+  background-color: var(--mercury);
+  border-radius: 10px;
+  height: 31px;
+  left: -8px;
+  position: absolute;
+  top: 42px;
+  width: 130px;
+}
+
+.x2u95darku951080x1080u95error .text {
+  letter-spacing: 0;
+  position: absolute;
+}

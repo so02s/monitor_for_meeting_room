@@ -1,0 +1,175 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+/* The following line is used to measure usage of this code. You can remove it if you want. */
+@import url("https://px.animaapp.com/6798e34eb619605707a630da.6798e34fb619605707a630dd.FwakgK9.hcp.png");
+
+@font-face {
+  font-family: "SB Sans Display-Semibold";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/SBSansDisplay-SemiBold.otf") format("opentype");
+}
+
+
+.screen a {
+  display: contents;
+  text-decoration: none;
+}
+
+.container-center-horizontal {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  pointer-events: none;
+  width: 100%;
+}
+
+.container-center-horizontal > * {
+  flex-shrink: 0;
+  pointer-events: auto;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.rectangle-40580 {
+  transform: rotate(-45deg);
+}
+
+.rectangle-40581 {
+  transform: rotate(-135deg);
+}
+
+.vector-1 {
+  height: 1042px;
+  left: 19px;
+  position: absolute;
+  top: 19px;
+  width: 1041px;
+}
+
+.frame-204368289 {
+  align-items: center;
+  background-color: var(--orange-red);
+  border: 2px solid;
+  border-radius: 15px;
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 10px;
+  justify-content: center;
+  padding: 20px;
+  position: relative;
+}
+
+.frame {
+  align-items: center;
+  position: relative;
+}
+
+.flex-col {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 77px;
+  left: 0;
+  min-height: 364px;
+  position: absolute;
+  top: 75px;
+  width: 1920px;
+}
+
+.text-container {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  min-height: 285px;
+  width: 991px;
+}
+
+.frame-2043682901 {
+  align-items: flex-start;
+  display: flex;
+  gap: 22.48px;
+  left: 675px;
+  position: absolute;
+  top: 561px;
+  width: 1166px;
+}
+
+.x6735 {
+  height: 44.96px;
+  margin-bottom: -1.12px;
+  margin-left: -1.12px;
+  margin-right: -1.12px;
+  margin-top: -1.13px;
+  position: relative;
+  width: 44.96px;
+}
+
+.frame-2043682901-1 {
+  align-items: flex-start;
+  display: flex;
+  gap: 22.48px;
+  left: 676px;
+  position: absolute;
+  top: 855px;
+  width: 1164px;
+}
+
+.frame-2043682893-1 {
+  align-items: center;
+  background-color: var(--green);
+  border: 2.25px solid;
+  border-radius: 16.86px;
+  display: flex;
+  gap: 11.24px;
+  height: 87.68px;
+  justify-content: center;
+  padding: 22.48px;
+  position: relative;
+  width: 87.68px;
+}
+
+.vector-211 {
+  height: 2px;
+  margin-top: 77px;
+  width: 1920px;
+}
+
+.flex-row-1 {
+  align-items: center;
+  display: flex;
+  gap: 180px;
+  margin-left: 85px;
+  margin-top: 155px;
+  min-width: 1529px;
+}
+
+.group-2043683288 {
+  align-items: flex-start;
+  display: flex;
+  gap: 189px;
+  height: 283px;
+  margin-left: 85px;
+  margin-top: 122px;
+  min-width: 1342px;
+}
+
+.frame-2043682904 {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+  width: 752px;
+}
+
+.frame-204368290 {
+  align-items: flex-start;
+  align-self: stretch;
+  display: flex;
+  flex: 0 0 auto;
+  gap: 22.48px;
+  position: relative;
+  width: 100%;
+}
