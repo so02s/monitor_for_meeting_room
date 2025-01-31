@@ -58,6 +58,21 @@
   width: 316px;
 }
 
+
+.rotate {
+  animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
 .x2u95darku951080x1080u95error .rectangle {
   background-color: var(--mercury);
   border-radius: 10px;
