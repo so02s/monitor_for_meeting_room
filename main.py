@@ -9,7 +9,7 @@ from decouple import config
 import LD2410
 
 from utils.request import fetch_data, fetch_data_test
-from utils.json import parse_schedule
+from utils.json import parse_schedule, valid_records
 # from utils.pixel import change_color
 from utils.gui import change_image, static_image, turn_off_hdmi, turn_on_hdmi
 from utils.timer import ResettableTimer
@@ -40,12 +40,13 @@ async def check_schedule():
     # pixels = neopixel.NeoPixel(LED_PIN, LED_COUNT)
     
     while True:
+
         try:
             response = await fetch_data_test(url, room)
         except:
             response = None
 
-        if not response:
+        if not response or not valid_records(response):
             await static_image(base_dir)
         else:
             try:

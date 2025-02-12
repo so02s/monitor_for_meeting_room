@@ -1,49 +1,58 @@
 import json
 from datetime import datetime
+from decouple import config
 
-def parse_schedule(response: str):
+def valid_records(json_text: str) -> bool:
+    """
+    Проверяет response
+
+    Args:
+        json_text (str): JSON-текст для проверки.
+
+    Returns:
+        Валиден ли ответ
+    """
+
     try:
-        data = json.loads(response)
-    except json.JSONDecodeError:
-        raise ValueError("Ошибка: Неверный формат JSON.")
+        data = json.loads(json_text)
+    except json.JSONDecodeError as e:
+        print(f"Ошибка парсинга JSON: {e}")
+        return False
 
     if not all(key in data for key in ["room", "date", "records"]):
-        raise KeyError("Ошибка: Отсутствуют необходимые ключи в JSON (room, date, records).")
+        print("Недостаточно данных в JSON-тексте")
+        return False
+    
+    today = datetime.today().strftime("%Y-%m-%d")
+    if data["date"] != today:
+        print("Дата в JSON-тексте не соответствует сегодняшней дате")
+        return False
 
-    records = data["records"]
+    if data["room"] != config["ROOM_NUMBER"]:
+        print("Номер комнаты в JSON-тексте не соответствует конфигурации")
+        return False
 
     if not isinstance(records, list):
-        raise TypeError("Ошибка: 'records' должен быть списком.")
+        print("Ошибка: 'records' должен быть списком.")
+        return False
+    
+    # TODO возможно, необходимо проверить отдельные записи
+
+    return True
+
+
+def parse_schedule(response: str):
+    
+    data = json.loads(response)
+    records = data["records"]
 
     current_time = datetime.now().strftime("%H:%M")
     occupied = None
     
-    # проверка занятости и форматирование
     for record in records:
-        if not isinstance(record, dict):
-            raise TypeError("Ошибка: Каждый элемент в 'records' должен быть словарем.")
-        if "name" not in record or "time" not in record:
-            raise KeyError("Ошибка: Каждый элемент в 'records' должен содержать ключи 'name' и 'time'.")
-
-        time_range = record["time"].split('-')
-
-        if len(time_range) != 2:
-            raise ValueError(f"Ошибка: Неверный формат времени для записи {record}. Ожидается 'HH:MM-HH:MM'.")
-        
-        start_time, end_time = time_range
-        
-        try:
-            f_start_dt = datetime.strptime(start_time, "%H:%M").strftime("%H:%M")
-            f_end_dt = datetime.strptime(end_time, "%H:%M").strftime("%H:%M")
-        except ValueError:
-            raise ValueError(f"Ошибка: Неверный формат времени для записи {record}. Ожидается 'HH:MM'.")
-        
-        # Форматирование записей
-        record["time"] = f"{f_start_dt}-{f_end_dt}"
-
-        if not occupied and start_time <= current_time <= end_time:
+        if not occupied and record["start_time"] <= current_time <= record["end_time"]:
             occupied = record
             
-    records.sort(key=lambda x: x['time'])
+    records.sort(key=lambda x: x['start_time'])
 
     return occupied, records
