@@ -28,13 +28,13 @@ def valid_records(json_text: str) -> bool:
         print("Дата в JSON-тексте не соответствует сегодняшней дате")
         return False
 
-    if data["room"] != config["ROOM_NUMBER"]:
-        print("Номер комнаты в JSON-тексте не соответствует конфигурации")
-        return False
+    # if data["room"] != config["ROOM_NUMBER"]:
+    #     print("Номер комнаты в JSON-тексте не соответствует конфигурации")
+    #     return False
 
-    if not isinstance(records, list):
-        print("Ошибка: 'records' должен быть списком.")
-        return False
+    # if not isinstance(records, list):
+    #     print("Ошибка: 'records' должен быть списком.")
+    #     return False
     
     # TODO возможно, необходимо проверить отдельные записи
 

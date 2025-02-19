@@ -1,7 +1,7 @@
 import os
 import time
 import subprocess
-from datetime import datetime
+from datetime import datetime, timedelta
 import webbrowser
 import pyautogui
 
@@ -10,38 +10,51 @@ from pathlib import Path
 
 # Генерирование веб страничек
 
-async def change_image(occupied: dict, schedule, path: Path):
+async def change_image(occupied: dict, schedule: list, path: Path):
     # определение стиля
-    mode = "light" if datetime.now().hour < 12 else "dark"
+    mode = "light" if not datetime.now().hour < 12 else "dark"
     occup = "occupied" if occupied else "free"
     dist_path = path / mode / occup
 
-    if occupied:
-        now = datetime.now()
-        for record in schedule:
-            record['time']
+    now = datetime.now()
+    time_str = now.strftime("%H:%M")
 
-        [{'name': x['name'], 'time': datetime.strptime(x['time'], '%H:%M')} for x in schedule]
-        schedule = [x for x in schedule if x['time'].replace(year=now.year, month=now.month, day=now.day) >= now]
-        schedule = schedule[:3]
-        schedule = [{'name': x['name'], 'time': x['time'].strftime('%H:%M')} for x in schedule]
-    else:
-        # TODO две занятые и вычисление свободного
-        pass
+    schedule = [
+        record for record in schedule 
+        if not record['end_time'] <= time_str
+    ]
 
-    # Рендер html странички
     tmp = Template(open(dist_path / "index.html").read())
-    html = tmp.render(slots=schedule)
+
+    if occupied:
+        for i in range(len(schedule)):
+            if i == 0:
+                if datetime.strptime(schedule[i]['start_time'], "%H:%M") > datetime.strptime(time_str, "%H:%M"):
+                    free_slot = f"{time_str} - {schedule[i]['start_time']}"
+                    break
+            else:
+                if datetime.strptime(schedule[i]['start_time'], "%H:%M") > datetime.strptime(schedule[i-1]['end_time'], "%H:%M"):
+                    free_slot = f"{schedule[i-1]['end_time']} - {schedule[i]['start_time']}"
+                    break
+        else:
+            free_slot = f"{schedule[-1]['end_time']} - {datetime.strptime(schedule[-1]['end_time'], '%H:%M') + timedelta(hours=1):%H:%M}"
+
+        html = tmp.render(occupied=occupied, free=free_slot)
+    else:
+        schedule = schedule[:3]
+        html = tmp.render(slots=schedule)
 
     # запись в файл
     with open(dist_path / "temp.html", "w") as f:
         f.write(html)
 
     # открытие странички
-    pyautogui.hotkey('ctrl', 'w')
-    # webbrowser.register('vivaldi', None, webbrowser.BackgroundBrowser('/usr/bin/vivaldi'))
-    # webbrowser.get('vivaldi').open(dist_path.as_posix() + "/temp.html")
-    webbrowser.open(dist_path.as_posix() + "/temp.html")
+    # pyautogui.hotkey('ctrl', 'w')
+    webbrowser.register('vivaldi', None, webbrowser.BackgroundBrowser('/usr/bin/vivaldi'))
+    webbrowser.get('vivaldi').open(dist_path.as_posix() + "/temp.html")
+    # webbrowser.open(dist_path.as_posix() + "/temp.html")
+
+
 
 async def static_image(path: Path):
     # определение стиля
@@ -64,11 +77,11 @@ async def static_image(path: Path):
 
 os.environ['DISPLAY'] = ':0'
 
-def turn_off_screen():
-    os.system("xset dpms force off")
+# def turn_off_screen():
+#     os.system("xset dpms force off")
 
-def turn_on_screen():
-    os.system("xset dpms force on")
+# def turn_on_screen():
+#     os.system("xset dpms force on")
 
 
 def set_brightness(brightness):

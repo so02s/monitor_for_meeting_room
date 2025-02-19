@@ -25,33 +25,17 @@
           <div class="group-2043683288">
             <div class="text-82 sbsansdisplay-normal-steel-gray-42px">ЗАНЯТЫЕ СЛОТЫ:</div>
             <div class="frame-2043682904">
+              {% for slot in slots %}
               <div class="frame-204368290">
                 <div class="frame-2043682893"><img class="x6735" src="img/6735.svg" alt="6735" /></div>
                 <div class="frame-2043682897">
-                  <div class="text-8 sbsansdisplay-normal-steel-gray-40-5px">10:00 - 10:30</div>
+                  <div class="text-8 sbsansdisplay-normal-steel-gray-40-5px">{{slot.start_time}} - {{slot.end_time}}</div>
                 </div>
                 <div class="frame-2043682896">
-                  <div class="text-8 sbsansdisplay-normal-steel-gray-40-5px">встреча</div>
+                  <div class="text-8 sbsansdisplay-normal-steel-gray-40-5px">{{slot.name}}</div>
                 </div>
               </div>
-              <div class="frame-204368290">
-                <div class="frame-2043682893"><img class="x6735" src="img/6735-1.svg" alt="6735" /></div>
-                <div class="frame-2043682897">
-                  <div class="text-8 sbsansdisplay-normal-steel-gray-40-5px">10:00 - 10:30</div>
-                </div>
-                <div class="frame-2043682896">
-                  <div class="text-8 sbsansdisplay-normal-steel-gray-40-5px">митинг</div>
-                </div>
-              </div>
-              <div class="frame-204368290">
-                <div class="frame-2043682893"><img class="x6735" src="img/6735-2.svg" alt="6735" /></div>
-                <div class="frame-2043682897">
-                  <div class="text-8 sbsansdisplay-normal-steel-gray-40-5px">10:00 - 10:30</div>
-                </div>
-                <div class="frame-2043682896">
-                  <div class="text-8 sbsansdisplay-normal-steel-gray-40-5px">созвон</div>
-                </div>
-              </div>
+              {% endfor %}
             </div>
           </div>
         </div>

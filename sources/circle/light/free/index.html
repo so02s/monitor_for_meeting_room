@@ -8,29 +8,19 @@
   </head>
   <body style="margin: 0; background: #e7e7e7">
     <input type="hidden" id="anPageName" name="page" value="2u95lightu951080x1080u95free" />
-    <div class="container-center-horizontal">
+    <div class="container-center-horizontal">Я
       <div class="x2u95lightu951080x1080u95free screen">
         <div class="overlap-group">
           <div class="text-3 text-1 sbsansdisplay-normal-steel-gray-48px">Занятые слоты:</div>
           <div class="frame-2043682899">
+            {% for slot in slots %}
             <div class="frame-204368289">
-              <div class="text text-1 sbsansdisplay-normal-mercury-36px">10:00 - 10:30</div>
+              <div class="text text-1 sbsansdisplay-normal-mercury-36px">{{slot.start_time}} - {{slot.end_time}}</div>
             </div>
             <div class="frame-204368289-1">
-              <div class="text text-1 sbsansdisplay-normal-steel-gray-36px">встреча</div>
+              <div class="text text-1 sbsansdisplay-normal-steel-gray-36px">{{slot.name}}</div>
             </div>
-            <div class="frame-204368289">
-              <div class="text text-1 sbsansdisplay-normal-mercury-36px">10:00 - 10:30</div>
-            </div>
-            <div class="frame-204368289-1">
-              <div class="text text-1 sbsansdisplay-normal-steel-gray-36px">митинг</div>
-            </div>
-            <div class="frame-204368289">
-              <div class="text text-1 sbsansdisplay-normal-mercury-36px">10:00 - 10:30</div>
-            </div>
-            <div class="frame-204368289-1">
-              <div class="text text-1 sbsansdisplay-normal-steel-gray-36px">созвон</div>
-            </div>
+            {% endfor %}
           </div>
           <h1 class="text-10 text-1 sbsansdisplay-normal-caribbean-green-50px">СВОБОДНО</h1>
           <div class="group-2043683285">

@@ -33,7 +33,6 @@ async def check_schedule():
     room = config('ROOM_NUMBER')
 
     base_dir = pathlib.Path('./sources') / config("DISPL")
-    # room_name = config('ROOM_NAME')
 
     # LED_COUNT = 4
     # LED_PIN = board.D12
@@ -42,20 +41,21 @@ async def check_schedule():
     while True:
 
         try:
-            response = await fetch_data_test(url, room)
+            response = await fetch_data_test(url, room) # fetch_data(url, room)
         except:
             response = None
 
         if not response or not valid_records(response):
             await static_image(base_dir)
         else:
-            try:
+            # try:
                 occupied, schedule = parse_schedule(response)
 
                 # await change_color(occupied, pixels)
                 await change_image(occupied, schedule, base_dir)
-            except:
-                await static_image(base_dir)
+                
+            # except:
+            #     await static_image(base_dir)
 
         await asyncio.sleep(30) # 15 минут = 15 * 60 = 900
 
