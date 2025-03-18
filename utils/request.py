@@ -66,7 +66,7 @@ async def fetch_data_test(url: str, room: str) -> Dict[str, Any]:
     return '''
 {
     "room": "1",
-    "date": "2025-02-17",
+    "date": "2025-03-17",
     "records": [
         {"name": "sorencoa",
         "start_time": "19:45",
@@ -75,8 +75,8 @@ async def fetch_data_test(url: str, room: str) -> Dict[str, Any]:
         "start_time": "18:30",
         "end_time": "19:00"},
         {"name": "jane_smith",
-        "start_time": "17:00",
-        "end_time": "18:30"}
+        "start_time": "16:00",
+        "end_time": "16:30"}
     ]
 }
 '''

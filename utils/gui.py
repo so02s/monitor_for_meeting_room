@@ -50,8 +50,10 @@ async def change_image(occupied: dict, schedule: list, path: Path):
 
     # открытие странички
     # pyautogui.hotkey('ctrl', 'w')
-    webbrowser.register('vivaldi', None, webbrowser.BackgroundBrowser('/usr/bin/vivaldi'))
-    webbrowser.get('vivaldi').open(dist_path.as_posix() + "/temp.html")
+    falcon_path = '/usr/bin/falkon'
+    subprocess.run([falcon_path, '--no-sandbox', "10.23.43.2"]) # dist_path.as_posix() + "/temp.html"])
+    # webbrowser.register('falkon', None, webbrowser.BackgroundBrowser('/usr/bin/falkon'))
+    # webbrowser.get('falkon').open(dist_path.as_posix() + "/temp.html")
     # webbrowser.open(dist_path.as_posix() + "/temp.html")
 
 
@@ -69,8 +71,10 @@ async def static_image(path: Path):
     with open(dist_path / "temp.html", "w") as f:
         f.write(html)
     
-    pyautogui.hotkey('ctrl', 'w')
-    webbrowser.open(dist_path.as_posix() + "/temp.html")
+    # pyautogui.hotkey('ctrl', 'w')
+    # webbrowser.open(dist_path.as_posix() + "/temp.html")
+    falcon_path = '/usr/bin/falkon'
+    subprocess.run([falcon_path, '--no-sandbox', "10.23.43.2"]) 
 
 
 # Работа с дисплеем

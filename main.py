@@ -3,14 +3,14 @@ import logging
 import pathlib
 from decouple import config
 
-# import board
-# import neopixel
+import board
+import neopixel
 
 import LD2410
 
 from utils.request import fetch_data, fetch_data_test
 from utils.json import parse_schedule, valid_records
-# from utils.pixel import change_color
+from utils.pixel import change_color
 from utils.gui import change_image, static_image, turn_off_hdmi, turn_on_hdmi
 from utils.timer import ResettableTimer
 
@@ -29,17 +29,16 @@ async def check_schedule():
     '''
         Функция, отвечающая за расписание, подсветку индикатора и отображаемую картинку
     '''
-    url = config('URL')
-    room = config('ROOM_NUMBER')
+    url = "1" #config('URL')
+    room = "2 " #config('ROOM_NUMBER')
 
     base_dir = pathlib.Path('./sources') / config("DISPL")
 
-    # LED_COUNT = 4
-    # LED_PIN = board.D12
-    # pixels = neopixel.NeoPixel(LED_PIN, LED_COUNT)
+    LED_COUNT = 4
+    LED_PIN = board.D12
+    pixels = neopixel.NeoPixel(LED_PIN, LED_COUNT)
     
     while True:
-
         try:
             response = await fetch_data_test(url, room) # fetch_data(url, room)
         except:
@@ -48,15 +47,16 @@ async def check_schedule():
         if not response or not valid_records(response):
             await static_image(base_dir)
         else:
-            # try:
+            try:
                 occupied, schedule = parse_schedule(response)
 
-                # await change_color(occupied, pixels)
+                await change_color(occupied, pixels)
                 await change_image(occupied, schedule, base_dir)
                 
-            # except:
-            #     await static_image(base_dir)
-
+            except:
+                await static_image(base_dir)
+                pass
+        # await change_color({'f':'m'}, pixels)
         await asyncio.sleep(30) # 15 минут = 15 * 60 = 900
 
 async def check_radar():

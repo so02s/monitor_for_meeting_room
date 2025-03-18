@@ -5,3 +5,5 @@ pyserial
 aiohttp
 python-decouple
 pyautogui
+dispmanx
+pygame
