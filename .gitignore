@@ -2,7 +2,7 @@
 .venv
 *.json
 autologin.sh
-temp.html
+
 
 
 ## Ignore Visual Studio temporary files, build results, and
