@@ -7,3 +7,4 @@ python-decouple
 pyautogui
 dispmanx
 pygame
+jinja2

@@ -4,4 +4,4 @@ ROOM_NUMBER=""
 ROOM_NAME=""
 
 # "circle" or "rectangle"
-DISPL=""
+DISPLAY="circle"

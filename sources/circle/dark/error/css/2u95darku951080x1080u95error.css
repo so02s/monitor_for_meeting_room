@@ -51,11 +51,11 @@
 }
 
 .x2u95darku951080x1080u95error .vector {
-  height: 231px;
-  left: 384px;
-  position: absolute;
-  top: 519px;
-  width: 316px;
+  width: 50vw;
+  min-height: 100vw;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 
